@@ -363,8 +363,8 @@ def save_data(data, save_format, save_name, save_folder, use_offset=True):
         las.z = points[:, 2]
 
         las.add_extra_dim(laspy.ExtraBytesParams(name="treeID", type=np.uint32))
-        las.treeID = labels
-        las.classification = classification
+        las.treeID = np.asarray(labels).astype(np.uint32)
+        las.classification = np.asarray(classification).astype(np.uint8)
 
         # Generate a color for each unique label
         unique_labels = np.unique(labels)
